@@ -1,11 +1,13 @@
 
 body {
-    font-family: "Lato", sans-serif;
-    
+    font-family: "Lato", sans-serif;  
   }
-  div {
-      text-align: center;
-  }
+  
+form {    
+     width:800px;
+     padding-left: 27rem;    
+}
+
   header {
     background-color: black;
     color: white;
@@ -20,7 +22,7 @@ body {
     width: 0;
     position: fixed;
     z-index: 1;
-    height: 550px;
+    height: 600px;
     top: 8px;
     right: 0;
     background-color: #111;
@@ -36,6 +38,7 @@ body {
     color: #818181;
     display: block;
     transition: 0.3s;
+    padding-top: 2rem;
   }
   
   .sidepanel a:hover {
@@ -68,3 +71,14 @@ body {
     hr {
         border: 5px solid black; 
         width: 1700px;
+        bottom: 300px;
+        position: fixed;
+     }
+
+     #filmInformation {
+        width: 800px;
+        height: 575px;
+        position:fixed;
+        text-align: center;
+        background-color: cornflowerblue;
+     }

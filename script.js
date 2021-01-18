@@ -8,45 +8,52 @@
   function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
   } 
-var numberOfFilms;
 
-function blockDivTags(){
-  for(i=0;i<numberOfFilms;i++){
+  let url = "https://swapi.dev/api/films/"
+
+  fetch(url)
+      .then(res => res.json())
+      .then(json => handleJson(json))
+
+  var numberOfFilms;
+
+  function blockDivTags(){
+    for(i=0;i<numberOfFilms;i++){
     document.getElementById("div" + i).style.display = "none";
-  }
+   }
 
-}
-function myEventHandler(e) {
-  console.log("hello " + e.target.id);
-  blockDivTags();
-  var id = e.target.id;
-  var element = document.getElementById("div"+id);
-  console.log(element);
-  element.style.display = 'block';
-}
+  }
+  function myEventHandler(e) {
+    console.log("hello " + e.target.id);
+    blockDivTags();
+    var id = e.target.id;
+    var element = document.getElementById("div"+id);
+    console.log(element);
+    element.style.display = 'block';
+  }
 
   function handleJson(json) {
     var temp = json.results;
     let filmsMenu = document.getElementById('mySidepanel');
     let filmInfo = document.getElementById("filmInformation");
     numberOfFilms = temp.length;
+
     for(i = 0 ; i < numberOfFilms; i++){
        obj = temp[i];
        console.log(obj.title);
 
        var divElement = document.createElement('div');
        divElement.id = "div" + i;
-        divElement.style.display = 'none';
+       divElement.style.display = 'none';
 
        var element = document.createElement('a');
        element.text = obj.title;
        element.id = i;
-      //element.href = obj.url;
-      element.href = "#";
-       //element.href = "javascript:myEventHandler";
-      element.addEventListener('click', myEventHandler);
-      var movieName = document.createElement("h2");
-      movieName.innerText = obj.title;
+       element.href = "#";
+       
+       element.addEventListener('click', myEventHandler);
+       var movieName = document.createElement("h2");
+       movieName.innerText = obj.title;
 
        var created = document.createElement('p');
        created.innerText = "Created: " + obj.created;
@@ -76,10 +83,3 @@ function myEventHandler(e) {
        console.log(obj.url);
     }
   }
-
-
-let url = "https://swapi.dev/api/films/"
-
-fetch(url)
-    .then(res => res.json())
-    .then(json => handleJson(json))
