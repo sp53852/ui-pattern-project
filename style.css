@@ -1,14 +1,27 @@
 
 body {
     font-family: "Lato", sans-serif;
+    
+  }
+  div {
+      text-align: center;
+  }
+  header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-left: 1px solid #777777;
+    border-right: 1px solid #777777;
+    border-top: 1px solid #777777;
+    border-bottom: 1px solid #777777;
   }
   
   .sidepanel  {
     width: 0;
     position: fixed;
     z-index: 1;
-    height: 250px;
-    top: 0;
+    height: 550px;
+    top: 8px;
     right: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -19,7 +32,7 @@ body {
   .sidepanel a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 17px;
     color: #818181;
     display: block;
     transition: 0.3s;
@@ -43,7 +56,7 @@ body {
       color: white;
       padding: 10px 15px;
       border: none;
-      top: 0;
+      top: 20px;
       right: 20px;
       position: fixed;
     }
@@ -54,5 +67,4 @@ body {
 
     hr {
         border: 5px solid black; 
-        width: 750px;
-
+        width: 1700px;

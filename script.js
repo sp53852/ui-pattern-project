@@ -8,18 +8,45 @@
   function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
   } 
+var numberOfFilms;
+
+function blockDivTags(){
+  for(i=0;i<numberOfFilms;i++){
+    document.getElementById("div" + i).style.display = "none";
+  }
+
+}
+function myEventHandler(e) {
+  console.log("hello " + e.target.id);
+  blockDivTags();
+  var id = e.target.id;
+  var element = document.getElementById("div"+id);
+  console.log(element);
+  element.style.display = 'block';
+}
 
   function handleJson(json) {
     var temp = json.results;
     let filmsMenu = document.getElementById('mySidepanel');
     let filmInfo = document.getElementById("filmInformation");
-    for(i = 0 ; i < temp.length; i++){
+    numberOfFilms = temp.length;
+    for(i = 0 ; i < numberOfFilms; i++){
        obj = temp[i];
        console.log(obj.title);
 
+       var divElement = document.createElement('div');
+       divElement.id = "div" + i;
+        divElement.style.display = 'none';
+
        var element = document.createElement('a');
        element.text = obj.title;
-       element.href = obj.url;
+       element.id = i;
+      //element.href = obj.url;
+      element.href = "#";
+       //element.href = "javascript:myEventHandler";
+      element.addEventListener('click', myEventHandler);
+      var movieName = document.createElement("h2");
+      movieName.innerText = obj.title;
 
        var created = document.createElement('p');
        created.innerText = "Created: " + obj.created;
@@ -38,15 +65,16 @@
 
 
        filmsMenu.appendChild(element);
-       filmInfo.appendChild(created);
-       filmInfo.appendChild(director);
-       filmInfo.appendChild(edited);
-       filmInfo.appendChild(episode_id);
-       filmInfo.appendChild(opening_crawl);
+       divElement.appendChild(movieName);
+       divElement.appendChild(created);
+       divElement.appendChild(director);
+       divElement.appendChild(edited);
+       divElement.appendChild(episode_id);
+       divElement.appendChild(opening_crawl);
+       filmInfo.appendChild(divElement);
+
        console.log(obj.url);
     }
-    //console.log(temp.length);
-    //console.log(json.parse("title"));
   }
 
 
@@ -55,6 +83,3 @@ let url = "https://swapi.dev/api/films/"
 fetch(url)
     .then(res => res.json())
     .then(json => handleJson(json))
-
-
-
