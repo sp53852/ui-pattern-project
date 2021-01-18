@@ -9,29 +9,34 @@
     document.getElementById("mySidepanel").style.width = "0";
   } 
 
+// Startwars API declaration.
   let url = "https://swapi.dev/api/films/"
 
+// fetching movie info 
   fetch(url)
       .then(res => res.json())
       .then(json => handleJson(json))
 
+// number of movies
   var numberOfFilms;
 
+//Clear div tags (hide).
   function blockDivTags(){
     for(i=0;i<numberOfFilms;i++){
     document.getElementById("div" + i).style.display = "none";
-   }
-
+    }
   }
+
+  //event handler for displaying movie information
   function myEventHandler(e) {
-    console.log("hello " + e.target.id);
     blockDivTags();
     var id = e.target.id;
     var element = document.getElementById("div"+id);
-    console.log(element);
+    //console.log(element);
     element.style.display = 'block';
   }
 
+  //create content for film menu and film information
   function handleJson(json) {
     var temp = json.results;
     let filmsMenu = document.getElementById('mySidepanel');
@@ -42,16 +47,11 @@
        obj = temp[i];
        console.log(obj.title);
 
+       // create a div tag for each film
        var divElement = document.createElement('div');
        divElement.id = "div" + i;
        divElement.style.display = 'none';
 
-       var element = document.createElement('a');
-       element.text = obj.title;
-       element.id = i;
-       element.href = "#";
-       
-       element.addEventListener('click', myEventHandler);
        var movieName = document.createElement("h2");
        movieName.innerText = obj.title;
 
@@ -70,16 +70,32 @@
        var opening_crawl = document.createElement('p');
        opening_crawl.innerText = "Opening Crawl: " + obj.opening_crawl;
 
+       
+      // apend all elements to div tag
+      divElement.appendChild(movieName);
+      divElement.appendChild(created);
+      divElement.appendChild(director);
+      divElement.appendChild(edited);
+      divElement.appendChild(episode_id);
+      divElement.appendChild(opening_crawl);
 
+      //apend div tag to film info
+      filmInfo.appendChild(divElement);
+
+      // End of div creation
+      
+
+      // Create anchors for side panel/films menu
+       var element = document.createElement('a');
+       element.text = obj.title;
+       element.id = i;
+       element.href = "#";
+
+       // Create event listener for side panel
+       element.addEventListener('click', myEventHandler);
+       
+      // append films menu
        filmsMenu.appendChild(element);
-       divElement.appendChild(movieName);
-       divElement.appendChild(created);
-       divElement.appendChild(director);
-       divElement.appendChild(edited);
-       divElement.appendChild(episode_id);
-       divElement.appendChild(opening_crawl);
-       filmInfo.appendChild(divElement);
 
-       console.log(obj.url);
     }
   }
